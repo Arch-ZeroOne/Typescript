@@ -6,7 +6,7 @@
 
 <pre>
 <code> 
-```const cashInRegister = 100;```
+const cashInRegister = 100;
 </code>
  </pre>
 
@@ -14,7 +14,7 @@
 
 <pre>
 <code> 
-```let cashInRegister = 100;```
+let cashInRegister = 100;
 </code>
  </pre>
 
@@ -24,7 +24,7 @@
 
 <pre>
 <code> 
-``` cashInRegister += selectedPizza.price;```
+ cashInRegister += selectedPizza.price;
 </code>
  </pre>
 
@@ -32,7 +32,7 @@
 
 <pre>
 <code> 
-```  if (selectedPizza) cashInRegister += selectedPizza.price;```
+  if (selectedPizza) cashInRegister += selectedPizza.price;
 </code>
  </pre>
 
@@ -40,11 +40,28 @@
 
 <pre>
 <code> 
-```  let myName: string = "Bob";
+     let myName: string = "Bob";
      let numberOfWheels: number = 4
      let isStudent: boolean = false
-```
+
 </code>
  </pre>
 
-**Assigning the type manually in TS (Obligatory Types)**
+**Adding Custom Types In Typescript**
+
+<pre>
+<code>
+type Person = {
+  name: string;
+  age: number;
+  isStudent: boolean;
+};
+
+let person: Person = {
+  name: "Joe",
+  age: 42,
+  isStudent: true,
+};
+
+</code>
+</pre>
