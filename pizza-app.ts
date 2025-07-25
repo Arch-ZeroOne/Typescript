@@ -1,3 +1,10 @@
+//Created our custom types for the Pizza Object
+
+type Pizza = {
+  name: string;
+  price: number;
+};
+
 const menu = [
   { name: "Margherita", price: 8 },
   { name: "Pepperoni", price: 10 },
@@ -11,12 +18,18 @@ let nextOrderId = 1;
 const orderQueue = [];
 
 //Says pizzaObj implicitly has an
-function addNewPizza(pizzaObj) {
+//!Solving the issue
+//* We solved the issue in here by specifying that pizzaObj has the shape of Pizza
+function addNewPizza(pizzaObj: Pizza) {
   menu.push(pizzaObj);
 }
 
 //Says pizzaName implicitly has an
-function placeOrder(pizzaName) {
+//! Solving the issue
+//* We also specify the type of pizza name here to string
+//from -> pizzaName
+//to ->  pizzaName:string
+function placeOrder(pizzaName: string) {
   const selectedPizza = menu.find((pizzaObj) => pizzaObj.name === pizzaName);
   //Says cashInRegister is a constant or readOnly property (Solved by switching from const to let)
 
@@ -37,11 +50,14 @@ function placeOrder(pizzaName) {
   orderQueue.push(newOrder);
   return newOrder;
 }
+
+// ========================================================================
 //? Says orderId implicitly has any type property (it says this because typescript doesnt know what exact type orderId is)
 //! Solving the issue:
-// from : orderId
-// to : orderId:number
+//* from : orderId
+//* to : orderId:number
 // We also need to change the completeOrder call into a number
+// ========================================================================
 function completeOrder(orderId: number) {
   //Says orderQueue implicitly has any type property
   const order = orderQueue.find((order) => order.id === orderId);
@@ -49,9 +65,10 @@ function completeOrder(orderId: number) {
   return order;
 }
 
-addNewPizza({ name: "Chicken Bacon Ranch", cost: 12 });
-addNewPizza({ name: "BBQ Chicken", cost: 12 });
-addNewPizza({ name: "Spicy Sausage", cost: 11 });
+//* We will also change the adding of object here since the Type pizza has price instead of cost
+addNewPizza({ name: "Chicken Bacon Ranch", price: 12 });
+addNewPizza({ name: "BBQ Chicken", price: 12 });
+addNewPizza({ name: "Spicy Sausage", price: 11 });
 
 placeOrder("Chicken Bacon Ranch");
 completeOrder(1);

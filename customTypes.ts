@@ -1,8 +1,6 @@
 // Custom types in TS forces Us to stay consistent when it comes to defining objects in our codebase
 //Custom types in typescript should be in UpperCase
 
-
-
 type Person = {
   name: string;
   age: number;
@@ -27,4 +25,19 @@ let person2: Person = {
   name: "Jill",
   age: 22,
   isStudent: false,
+};
+
+//Mock Custom Type
+type Car = {
+  carId: number;
+  modelName: string;
+  color: string;
+  variants: string[];
+};
+
+const car1: Car = {
+  carId: 1,
+  modelName: "Lamborgini",
+  color: "Blue",
+  variants: ["Automatic", "Manual"],
 };
