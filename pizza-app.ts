@@ -5,6 +5,13 @@ type Pizza = {
   price: number;
 };
 
+//Type for order
+type Order = {
+  id: number;
+  pizza: Pizza;
+  status: string;
+};
+
 const menu = [
   { name: "Margherita", price: 8 },
   { name: "Pepperoni", price: 10 },
@@ -15,9 +22,12 @@ const menu = [
 let cashInRegister = 100;
 let nextOrderId = 1;
 //Says orderQue implicitly has any type
-const orderQueue = [];
+//! Solving the issue
+//*  We solved the issue by explicitly saying that orderQue will expect an array of Order as value
+//Before: const orderQueue = [];
+const orderQueue: Order[] = [];
 
-//Says pizzaObj implicitly has an
+//Says pizzaObj implicitly has any
 //!Solving the issue
 //* We solved the issue in here by specifying that pizzaObj has the shape of Pizza
 function addNewPizza(pizzaObj: Pizza) {
@@ -37,15 +47,21 @@ function placeOrder(pizzaName: string) {
   //? Says selectedPizza.price is possibly undefined (It says it because when we search for an item in selected pizza we might get an undefined item which can cause errors)
   //!Solving this issue - Here we are using defensive coding
   //   cashInRegister += selectedPizza.price;
-  if (selectedPizza) cashInRegister += selectedPizza.price;
+  if (!selectedPizza) {
+    return;
+  }
+
+  cashInRegister += selectedPizza.price;
   //=========================================================================
 
   //Says nextOrderId  is a constant or readOnly property
-  const newOrder = {
+
+  const newOrder: Order = {
     id: nextOrderId++,
     pizza: selectedPizza,
     status: "ordered",
   };
+
   //Says orderQueue implicitly has any type property
   orderQueue.push(newOrder);
   return newOrder;
@@ -61,7 +77,8 @@ function placeOrder(pizzaName: string) {
 function completeOrder(orderId: number) {
   //Says orderQueue implicitly has any type property
   const order = orderQueue.find((order) => order.id === orderId);
-  order.status = "completed";
+  // Defensive coding for possibly null value of status
+  if (order) order.status = "completed";
   return order;
 }
 

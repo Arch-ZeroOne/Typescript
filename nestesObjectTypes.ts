@@ -1,7 +1,5 @@
 //Nested object types are commonly used to define complex objects
 
-
-
 //Custom Human Type with nested object type
 type Human = {
   name: string;

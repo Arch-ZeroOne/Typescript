@@ -7,3 +7,6 @@ let isStudent: boolean = false;
 const clientName: string = "Windyl";
 const clientAge: number = 18;
 const clientBalance: number = 10.2;
+
+//Mock Product Info
+const produdtName: string = "Boysen";
