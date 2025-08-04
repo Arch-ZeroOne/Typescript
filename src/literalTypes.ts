@@ -7,4 +7,4 @@ let name1 = "Bob";
 const name2 = "Bob";
 
 //This will get an error since we declared that the "literal" value  of the name3 variable should be Bob
-const name3: "Bob" = "Jason";
+const name3: "Jason" = "Jason";

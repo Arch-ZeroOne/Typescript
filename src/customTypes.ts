@@ -41,3 +41,23 @@
 //   color: "Blue",
 //   variants: ["Automatic", "Manual"],
 // };
+
+type Person = {
+  name: string;
+  age: number;
+  isMarried: boolean;
+  address?: string;
+};
+
+const windyl: Person = {
+  name: "Windyl Monton",
+  age: 18,
+  isMarried: true,
+  address: "Bundas",
+};
+
+const mekylla: Person = {
+  name: "Mekylla Taghoy",
+  age: 30,
+  isMarried: false,
+};

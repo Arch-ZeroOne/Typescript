@@ -15,10 +15,17 @@ type Human = {
 
 //*We can also extract or separate the nested object type
 
+//Extended types for nested object types complexity
 type Address = {
   street: string;
   city: string;
   country: string;
+};
+
+type GameInformation = {
+  gameName: string;
+  isPro: boolean;
+  gameId?: string;
 };
 
 //* So the nested object can look like this
@@ -30,6 +37,11 @@ type Address = {
 //   address: Address;
 // };
 
+type Gamer = {
+  username: string;
+  gameInfo: GameInformation;
+};
+
 const human: Human = {
   name: "Windyl",
   age: 18,
@@ -38,5 +50,14 @@ const human: Human = {
     street: "Bundas Lupon Davao Oriental",
     city: "Davao City",
     country: "Philippines",
+  },
+};
+
+const player1: Gamer = {
+  username: "WIndyl Baho",
+  gameInfo: {
+    gameName: "Mobile Legends",
+    isPro: true,
+    gameId: "123456",
   },
 };

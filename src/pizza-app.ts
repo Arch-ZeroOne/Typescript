@@ -1,6 +1,7 @@
 //Created our custom types for the Pizza Object
 
 type Pizza = {
+  id: number;
   name: string;
   price: number;
 };
@@ -9,14 +10,16 @@ type Pizza = {
 type Order = {
   id: number;
   pizza: Pizza;
-  status: string;
+  //We did this to implement Union and Literals concepts limiting the value of status to "order" or "completed" only
+  status: "ordered" | "completed";
 };
 
-const menu = [
-  { name: "Margherita", price: 8 },
-  { name: "Pepperoni", price: 10 },
-  { name: "Hawaiian", price: 10 },
-  { name: "Veggie", price: 9 },
+//Added the order type here to specify that this should be in the type pizza
+const menu: Pizza[] = [
+  { id: 1, name: "Margherita", price: 8 },
+  { id: 2, name: "Pepperoni", price: 10 },
+  { id: 3, name: "Hawaiian", price: 10 },
+  { id: 4, name: "Veggie", price: 9 },
 ];
 
 let cashInRegister = 100;
@@ -82,10 +85,30 @@ function completeOrder(orderId: number) {
   return order;
 }
 
+//TODO Currently learning type narrowing
+//Type narrowing the details of getDetails
+//Here we explicitly specify the possible cases
+//! Be explicit as much as you can
+function getDetails(identifier: string | number) {
+  if (typeof identifier === "string") {
+    return menu.find(
+      (data) => data.name.toLowerCase() === identifier.toLowerCase()
+    );
+
+    //Once we copied the old code from the filtering of identifier that expects string it will expect a number , since typescript can predict the next type based on how we handle the case in filtering the identifier
+  } else if (typeof identifier === "number") {
+    return menu.find((data) => data.id === identifier);
+  } else {
+    throw new TypeError(
+      "Parameter Identifier must be either a string or a number"
+    );
+  }
+}
+
 //* We will also change the adding of object here since the Type pizza has price instead of cost
-addNewPizza({ name: "Chicken Bacon Ranch", price: 12 });
-addNewPizza({ name: "BBQ Chicken", price: 12 });
-addNewPizza({ name: "Spicy Sausage", price: 11 });
+addNewPizza({ id: 4, name: "Chicken Bacon Ranch", price: 12 });
+addNewPizza({ id: 5, name: "BBQ Chicken", price: 12 });
+addNewPizza({ id: 6, name: "Spicy Sausage", price: 11 });
 
 placeOrder("Chicken Bacon Ranch");
 completeOrder(1);

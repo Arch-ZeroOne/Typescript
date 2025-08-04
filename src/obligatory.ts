@@ -9,4 +9,6 @@ const clientAge: number = 18;
 const clientBalance: number = 10.2;
 
 //Mock Product Info
-const produdtName: string = "Boysen";
+const productName: string = "Boysen";
+
+const numberArrr: number[] = [1, 2, 3, 4, 5];
