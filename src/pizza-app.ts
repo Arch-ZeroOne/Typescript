@@ -14,7 +14,7 @@ type Order = {
   status: "ordered" | "completed";
 };
 
-//Added the order type here to specify that this should be in the type pizza
+//* Added the order type here to specify that this should be in the type pizza
 const menu: Pizza[] = [
   { id: 1, name: "Margherita", price: 8 },
   { id: 2, name: "Pepperoni", price: 10 },
@@ -88,8 +88,9 @@ function completeOrder(orderId: number) {
 //TODO Currently learning type narrowing
 //Type narrowing the details of getDetails
 //Here we explicitly specify the possible cases
+//This function may only return a pizza object or undefined
 //! Be explicit as much as you can
-function getDetails(identifier: string | number) {
+function getPizzaDetail(identifier: string | number): Pizza | undefined {
   if (typeof identifier === "string") {
     return menu.find(
       (data) => data.name.toLowerCase() === identifier.toLowerCase()
