@@ -1,7 +1,7 @@
 //Created our custom types for the Pizza Object
 
 type Pizza = {
-  id: number;
+  id?: number;
   name: string;
   price: number;
 };
@@ -15,15 +15,18 @@ type Order = {
 };
 
 //* Added the order type here to specify that this should be in the type pizza
-const menu: Pizza[] = [
-  { id: 1, name: "Margherita", price: 8 },
-  { id: 2, name: "Pepperoni", price: 10 },
-  { id: 3, name: "Hawaiian", price: 10 },
-  { id: 4, name: "Veggie", price: 9 },
-];
 
 let cashInRegister = 100;
 let nextOrderId = 1;
+let pizzaId = 1;
+
+const menu: Pizza[] = [
+  { id: pizzaId++, name: "Margherita", price: 8 },
+  { id: pizzaId++, name: "Pepperoni", price: 10 },
+  { id: pizzaId++, name: "Hawaiian", price: 10 },
+  { id: pizzaId++, name: "Veggie", price: 9 },
+];
+
 //Says orderQue implicitly has any type
 //! Solving the issue
 //*  We solved the issue by explicitly saying that orderQue will expect an array of Order as value
@@ -33,8 +36,17 @@ const orderQueue: Order[] = [];
 //Says pizzaObj implicitly has any
 //!Solving the issue
 //* We solved the issue in here by specifying that pizzaObj has the shape of Pizza
-function addNewPizza(pizzaObj: Pizza) {
-  menu.push(pizzaObj);
+function addNewPizza(pizzaObj: Pizza): void {
+  if ("id" in pizzaObj) {
+    menu.push(pizzaObj);
+  } else {
+    const newPizza = {
+      id: pizzaId++,
+      name: pizzaObj.name,
+      price: pizzaObj.price,
+    };
+    menu.push(newPizza);
+  }
 }
 
 //Says pizzaName implicitly has an
@@ -42,7 +54,7 @@ function addNewPizza(pizzaObj: Pizza) {
 //* We also specify the type of pizza name here to string
 //from -> pizzaName
 //to ->  pizzaName:string
-function placeOrder(pizzaName: string) {
+function placeOrder(pizzaName: string): Order | undefined {
   const selectedPizza = menu.find((pizzaObj) => pizzaObj.name === pizzaName);
   //Says cashInRegister is a constant or readOnly property (Solved by switching from const to let)
 
@@ -77,7 +89,7 @@ function placeOrder(pizzaName: string) {
 //* to : orderId:number
 // We also need to change the completeOrder call into a number
 // ========================================================================
-function completeOrder(orderId: number) {
+function completeOrder(orderId: number): Order | undefined {
   //Says orderQueue implicitly has any type property
   const order = orderQueue.find((order) => order.id === orderId);
   // Defensive coding for possibly null value of status
@@ -85,7 +97,6 @@ function completeOrder(orderId: number) {
   return order;
 }
 
-//TODO Currently learning type narrowing
 //Type narrowing the details of getDetails
 //Here we explicitly specify the possible cases
 //This function may only return a pizza object or undefined
@@ -107,12 +118,15 @@ function getPizzaDetail(identifier: string | number): Pizza | undefined {
 }
 
 //* We will also change the adding of object here since the Type pizza has price instead of cost
-addNewPizza({ id: 4, name: "Chicken Bacon Ranch", price: 12 });
-addNewPizza({ id: 5, name: "BBQ Chicken", price: 12 });
-addNewPizza({ id: 6, name: "Spicy Sausage", price: 11 });
+addNewPizza({ id: pizzaId++, name: "Chicken Bacon Ranch", price: 12 });
+addNewPizza({ id: pizzaId++, name: "BBQ Chicken", price: 12 });
+addNewPizza({ id: pizzaId++, name: "Spicy Sausage", price: 11 });
+addNewPizza({ id: pizzaId++, name: "Coconut Pizza", price: 100 });
+addNewPizza({ id: pizzaId++, name: "Red Horse Pizza", price: 100 });
+addNewPizza({ id: pizzaId++, name: "Jellian Pizza", price: 20 });
 
-placeOrder("Chicken Bacon Ranch");
-completeOrder(1);
+// placeOrder("Chicken Bacon Ranch");
+// completeOrder(1);
 
 console.log("Menu:", menu);
 console.log("Cash in register:", cashInRegister);

@@ -11,6 +11,7 @@ const users: User[] = [
   { username: "guest_user", role: "guest" },
 ];
 
+//Implementing type narrowing
 //By using :User in here we are saying that we are using a function with a return type of User
 function fetchUserData(username: string): User {
   const user = users.find((data) => data.username === username);

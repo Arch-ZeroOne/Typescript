@@ -1,14 +1,16 @@
 "use strict";
 //Created our custom types for the Pizza Object
 Object.defineProperty(exports, "__esModule", { value: true });
-const menu = [
-    { id: 1, name: "Margherita", price: 8 },
-    { id: 2, name: "Pepperoni", price: 10 },
-    { id: 3, name: "Hawaiian", price: 10 },
-    { id: 4, name: "Veggie", price: 9 },
-];
+//* Added the order type here to specify that this should be in the type pizza
 let cashInRegister = 100;
 let nextOrderId = 1;
+let pizzaId = 1;
+const menu = [
+    { id: pizzaId++, name: "Margherita", price: 8 },
+    { id: pizzaId++, name: "Pepperoni", price: 10 },
+    { id: pizzaId++, name: "Hawaiian", price: 10 },
+    { id: pizzaId++, name: "Veggie", price: 9 },
+];
 //Says orderQue implicitly has any type
 //! Solving the issue
 //*  We solved the issue by explicitly saying that orderQue will expect an array of Order as value
@@ -18,7 +20,17 @@ const orderQueue = [];
 //!Solving the issue
 //* We solved the issue in here by specifying that pizzaObj has the shape of Pizza
 function addNewPizza(pizzaObj) {
-    menu.push(pizzaObj);
+    if ("id" in pizzaObj) {
+        menu.push(pizzaObj);
+    }
+    else {
+        const newPizza = {
+            id: pizzaId++,
+            name: pizzaObj.name,
+            price: pizzaObj.price,
+        };
+        menu.push(newPizza);
+    }
 }
 //Says pizzaName implicitly has an
 //! Solving the issue
@@ -62,12 +74,31 @@ function completeOrder(orderId) {
         order.status = "completed";
     return order;
 }
+//Type narrowing the details of getDetails
+//Here we explicitly specify the possible cases
+//This function may only return a pizza object or undefined
+//! Be explicit as much as you can
+function getPizzaDetail(identifier) {
+    if (typeof identifier === "string") {
+        return menu.find((data) => data.name.toLowerCase() === identifier.toLowerCase());
+        //Once we copied the old code from the filtering of identifier that expects string it will expect a number , since typescript can predict the next type based on how we handle the case in filtering the identifier
+    }
+    else if (typeof identifier === "number") {
+        return menu.find((data) => data.id === identifier);
+    }
+    else {
+        throw new TypeError("Parameter Identifier must be either a string or a number");
+    }
+}
 //* We will also change the adding of object here since the Type pizza has price instead of cost
-addNewPizza({ id: 4, name: "Chicken Bacon Ranch", price: 12 });
-addNewPizza({ id: 5, name: "BBQ Chicken", price: 12 });
-addNewPizza({ id: 6, name: "Spicy Sausage", price: 11 });
-placeOrder("Chicken Bacon Ranch");
-completeOrder(1);
+addNewPizza({ id: pizzaId++, name: "Chicken Bacon Ranch", price: 12 });
+addNewPizza({ id: pizzaId++, name: "BBQ Chicken", price: 12 });
+addNewPizza({ id: pizzaId++, name: "Spicy Sausage", price: 11 });
+addNewPizza({ id: pizzaId++, name: "Coconut Pizza", price: 100 });
+addNewPizza({ id: pizzaId++, name: "Red Horse Pizza", price: 100 });
+addNewPizza({ id: pizzaId++, name: "Jellian Pizza", price: 20 });
+// placeOrder("Chicken Bacon Ranch");
+// completeOrder(1);
 console.log("Menu:", menu);
 console.log("Cash in register:", cashInRegister);
 //Says orderQueue implicitly has any type property
