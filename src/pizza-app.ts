@@ -1,7 +1,7 @@
 //Created our custom types for the Pizza Object
 
 type Pizza = {
-  id?: number;
+  id: number;
   name: string;
   price: number;
 };
@@ -34,22 +34,13 @@ const menu: Pizza[] = [
 const orderQueue: Order[] = [];
 
 //Says pizzaObj implicitly has any
-//!Solving the issue
+//!Solving the issue  
 //* We solved the issue in here by specifying that pizzaObj has the shape of Pizza
 function addNewPizza(pizzaObj: Pizza): void {
-  if ("id" in pizzaObj) {
-    menu.push(pizzaObj);
-  } else {
-    const newPizza = {
-      id: pizzaId++,
-      name: pizzaObj.name,
-      price: pizzaObj.price,
-    };
-    menu.push(newPizza);
-  }
+  menu.push(pizzaObj);
 }
 
-//Says pizzaName implicitly has an
+//Says pizzaName implicitly has any type
 //! Solving the issue
 //* We also specify the type of pizza name here to string
 //from -> pizzaName

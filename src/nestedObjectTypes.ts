@@ -33,7 +33,7 @@ type GameInformation = {
 //   name: string;
 //   age: number;
 //   isStudent: false;
-//   //*Here is the nested object types
+//   //*Here is the nested object type in action
 //   address: Address;
 // };
 
