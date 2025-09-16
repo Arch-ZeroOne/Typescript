@@ -5,6 +5,7 @@ const users = [
     { id: nextUserId++, username: "john_doe", role: "member" },
     { id: nextUserId++, username: "jane_smith", role: "contributor" },
 ];
+//Omit type returns a type with those properties removed
 function addNewUser(newUser) {
     const user = {
         id: nextUserId++,

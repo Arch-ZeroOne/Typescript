@@ -1,6 +1,7 @@
 //Typing an array means that if the type of array is a number, it will only then accepts number only
 const arrNum: number[] = [1, 2, 3, 4, 5];
 const arrString: string[] = ["Windyl", "Parcon", "Monton"];
+const boolAr: boolean[] = [true, true, false];
 
 //creating a array of person type
 
@@ -27,6 +28,3 @@ let arrPerson: Person[] = [person1, person2];
 
 //Another known syntax for arrays
 let arrPerson2: Array<Person> = [person1, person2];
-
-
-

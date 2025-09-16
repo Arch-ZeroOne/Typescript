@@ -11,6 +11,7 @@ const users: User[] = [
   { id: nextUserId++, username: "jane_smith", role: "contributor" },
 ];
 
+//Omit type returns a type with those properties removed
 function addNewUser(newUser: Omit<User, "id">): User {
   const user: User = {
     id: nextUserId++,

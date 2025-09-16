@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //Typing an array means that if the type of array is a number, it will only then accepts number only
 const arrNum = [1, 2, 3, 4, 5];
 const arrString = ["Windyl", "Parcon", "Monton"];
+const boolAr = [true, true, false];
 let person1 = {
     name: "Windyl",
     age: 18,

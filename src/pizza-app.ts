@@ -19,6 +19,7 @@ type Order = {
 let cashInRegister = 100;
 let nextOrderId = 1;
 let pizzaId = 1;
+let nextPizzaId = 1;
 
 const menu: Pizza[] = [
   { id: pizzaId++, name: "Margherita", price: 8 },
@@ -34,7 +35,7 @@ const menu: Pizza[] = [
 const orderQueue: Order[] = [];
 
 //Says pizzaObj implicitly has any
-//!Solving the issue  
+//!Solving the issue
 //* We solved the issue in here by specifying that pizzaObj has the shape of Pizza
 function addNewPizza(pizzaObj: Pizza): void {
   menu.push(pizzaObj);
@@ -108,18 +109,33 @@ function getPizzaDetail(identifier: string | number): Pizza | undefined {
   }
 }
 
+//*Our generic function
+
+function addToArray<T>(array: Array<T>, args: T): T[] {
+  array.push(args);
+  return array;
+}
+
+addToArray(menu, {
+  id: nextPizzaId++,
+  name: "Chicken Hotdog Cordon",
+  price: 12,
+});
+
 //* We will also change the adding of object here since the Type pizza has price instead of cost
-addNewPizza({ id: pizzaId++, name: "Chicken Bacon Ranch", price: 12 });
-addNewPizza({ id: pizzaId++, name: "BBQ Chicken", price: 12 });
-addNewPizza({ id: pizzaId++, name: "Spicy Sausage", price: 11 });
-addNewPizza({ id: pizzaId++, name: "Coconut Pizza", price: 100 });
-addNewPizza({ id: pizzaId++, name: "Red Horse Pizza", price: 100 });
-addNewPizza({ id: pizzaId++, name: "Jellian Pizza", price: 20 });
+// addNewPizza({ id: pizzaId++, name: "Chicken Bacon Ranch", price: 12 });
+// addNewPizza({ id: pizzaId++, name: "BBQ Chicken", price: 12 });
+// addNewPizza({ id: pizzaId++, name: "Spicy Sausage", price: 11 });
+// addNewPizza({ id: pizzaId++, name: "Coconut Pizza", price: 100 });
+// addNewPizza({ id: pizzaId++, name: "Red Horse Pizza", price: 100 });
+// addNewPizza({ id: pizzaId++, name: "Jellian Pizza", price: 20 });
 
 // placeOrder("Chicken Bacon Ranch");
 // completeOrder(1);
 
-console.log("Menu:", menu);
-console.log("Cash in register:", cashInRegister);
-//Says orderQueue implicitly has any type property
-console.log("Order queue:", orderQueue);
+// console.log("Menu:", menu);
+// console.log("Cash in register:", cashInRegister);
+// //Says orderQueue implicitly has any type property
+// console.log("Order queue:", orderQueue);
+
+console.log(menu);
