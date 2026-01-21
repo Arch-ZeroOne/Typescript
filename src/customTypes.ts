@@ -13,7 +13,7 @@
 //   isStudent: true,
 // };
 
-// //Typescript will warn if the created object doesnt match the custom type created ex:
+// //Typescript will warn if the created obje ct doesnt match the custom type created ex:
 
 // // let person2: Person = {
 // //   name: "Jill",
@@ -47,6 +47,8 @@ type Person = {
   age: number;
   isMarried: boolean;
   address?: string;
+  wife?: object;
+  husband?: object;
 };
 
 const windyl: Person = {
@@ -56,8 +58,16 @@ const windyl: Person = {
   address: "Bundas",
 };
 
+const peter: Person = {
+  name: "Peter Olan Olan",
+  age: 20,
+  isMarried: true,
+  address: "BH",
+  wife: mekylla,
+};
 const mekylla: Person = {
   name: "Mekylla Taghoy",
   age: 30,
   isMarried: false,
+  husband: peter,
 };
